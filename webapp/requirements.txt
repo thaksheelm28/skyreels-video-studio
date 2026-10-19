@@ -1,0 +1,10 @@
+# Additional dependencies for the webapp layer
+# Gradio 4.x is pinned for compatibility with huggingface-hub<1.0
+# (required by transformers, diffusers, tokenizers from the base SkyReels env)
+fastapi>=0.111.0,<0.116.0
+uvicorn[standard]>=0.29.0
+gradio==4.44.1
+huggingface-hub>=0.34.0,<1.0
+python-multipart>=0.0.9
+requests>=2.31.0
+Pillow>=10.0.0
