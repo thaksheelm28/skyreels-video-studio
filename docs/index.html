@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkyReels V2 — AI Video Generation Studio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 80px 20px;
+      text-align: center;
+      border-bottom: 1px solid #30363d;
+    }
+    .hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 16px; }
+    .hero h1 span { color: #a78bfa; }
+    .hero p { font-size: 1.2rem; color: #8b949e; max-width: 700px; margin: 0 auto 32px; }
+    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+    .badge {
+      padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+      background: #21262d; border: 1px solid #30363d;
+    }
+    .badge.purple { background: #2d1b69; border-color: #a78bfa; color: #a78bfa; }
+    .badge.blue   { background: #0d2137; border-color: #58a6ff; color: #58a6ff; }
+    .badge.green  { background: #0d2818; border-color: #3fb950; color: #3fb950; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 28px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-primary { background: #a78bfa; color: #0d1117; }
+    .btn-primary:hover { background: #c4b5fd; }
+    .btn-secondary { background: transparent; color: #e6edf3; border: 1px solid #30363d; }
+    .btn-secondary:hover { border-color: #8b949e; }
+
+    /* Sections */
+    .section { padding: 64px 20px; max-width: 1100px; margin: 0 auto; }
+    .section h2 { font-size: 2rem; margin-bottom: 40px; text-align: center; }
+    .section h2 span { color: #a78bfa; }
+
+    /* Feature cards */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .card {
+      background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+      padding: 28px; transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #a78bfa; }
+    .card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .card p { color: #8b949e; font-size: 0.9rem; line-height: 1.6; }
+
+    /* Architecture */
+    .arch {
+      background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+      padding: 32px; font-family: monospace; font-size: 0.85rem;
+      color: #8b949e; overflow-x: auto; line-height: 1.8;
+    }
+    .arch .highlight { color: #a78bfa; }
+    .arch .green { color: #3fb950; }
+    .arch .blue { color: #58a6ff; }
+
+    /* Tech stack */
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .tech-pill {
+      padding: 8px 18px; background: #161b22; border: 1px solid #30363d;
+      border-radius: 20px; font-size: 0.85rem; color: #c9d1d9;
+    }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+    .stat {
+      background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+      padding: 24px; text-align: center;
+    }
+    .stat .number { font-size: 2.4rem; font-weight: 700; color: #a78bfa; }
+    .stat .label { color: #8b949e; font-size: 0.9rem; margin-top: 4px; }
+
+    /* API */
+    .code {
+      background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+      padding: 24px; font-family: monospace; font-size: 0.85rem;
+      overflow-x: auto; line-height: 1.8;
+    }
+    .code .c-green { color: #3fb950; }
+    .code .c-blue { color: #79c0ff; }
+    .code .c-orange { color: #ffa657; }
+    .code .c-purple { color: #d2a8ff; }
+    .code .c-gray { color: #8b949e; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 40px 20px;
+      border-top: 1px solid #30363d; color: #8b949e; font-size: 0.9rem;
+    }
+    footer a { color: #a78bfa; text-decoration: none; }
+
+    hr { border: none; border-top: 1px solid #30363d; margin: 0; }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>🎬 SkyReels V2<br/><span>AI Video Generation Studio</span></h1>
+  <p>A production-grade, full-stack AI video generation web application powered by diffusion models, FastAPI, Gradio, and an async job queue.</p>
+  <div class="badges">
+    <span class="badge purple">PyTorch</span>
+    <span class="badge purple">Diffusion Models</span>
+    <span class="badge blue">FastAPI</span>
+    <span class="badge blue">Gradio</span>
+    <span class="badge green">Text-to-Video</span>
+    <span class="badge green">Image-to-Video</span>
+    <span class="badge purple">LLM Prompt Enhancer</span>
+    <span class="badge blue">Async Job Queue</span>
+  </div>
+  <div class="btns">
+    <a href="https://github.com/thaksheelm28/skyreels-video-studio" class="btn btn-primary" target="_blank">⭐ View on GitHub</a>
+    <a href="https://github.com/thaksheelm28/skyreels-video-studio#readme" class="btn btn-secondary" target="_blank">📄 Read the Docs</a>
+  </div>
+</div>
+
+<hr/>
+
+<!-- Stats -->
+<div class="section">
+  <h2>📊 Project <span>Highlights</span></h2>
+  <div class="stats">
+    <div class="stat"><div class="number">14B</div><div class="label">Model Parameters</div></div>
+    <div class="stat"><div class="number">3×</div><div class="label">Faster with TeaCache</div></div>
+    <div class="stat"><div class="number">97</div><div class="label">Frames Generated</div></div>
+    <div class="stat"><div class="number">6</div><div class="label">REST API Endpoints</div></div>
+    <div class="stat"><div class="number">5</div><div class="label">Job Status Stages</div></div>
+    <div class="stat"><div class="number">540P</div><div class="label">& 720P Output</div></div>
+  </div>
+</div>
+
+<hr/>
+
+<!-- Features -->
+<div class="section">
+  <h2>✨ Key <span>Features</span></h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">📝</div>
+      <h3>Text → Video</h3>
+      <p>Generate high-quality videos from natural language prompts using a 14B parameter diffusion transformer model.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🖼️</div>
+      <h3>Image → Video</h3>
+      <p>Animate any still image with natural, physics-aware motion using the SkyReels I2V pipeline.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🪄</div>
+      <h3>LLM Prompt Enhancer</h3>
+      <p>Qwen2.5 LLM automatically expands short prompts into rich cinematic descriptions for better output quality.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>TeaCache Acceleration</h3>
+      <p>~3× faster inference using TeaCache with minimal quality loss — configurable threshold for speed/quality tradeoff.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📦</div>
+      <h3>Async Job Queue</h3>
+      <p>Submit multiple jobs simultaneously. GPU processes them one at a time with real-time status tracking.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔌</div>
+      <h3>REST API + Swagger</h3>
+      <p>Full FastAPI backend with auto-generated Swagger docs, video streaming, health checks, and job management.</p>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<!-- Architecture -->
+<div class="section">
+  <h2>🏗️ System <span>Architecture</span></h2>
+  <div class="arch">
+<span class="highlight">┌─────────────────────────────────────────────────────┐</span>
+<span class="highlight">│</span>                   <span class="green">Gradio Web UI (:7860)</span>                <span class="highlight">│</span>
+<span class="highlight">│</span>   Tab: T2V  │  Tab: I2V  │  History  │  System      <span class="highlight">│</span>
+<span class="highlight">└──────────────────────┬──────────────────────────────┘</span>
+                       │ HTTP REST
+<span class="blue">┌──────────────────────▼──────────────────────────────┐</span>
+<span class="blue">│</span>           <span class="green">FastAPI Backend (:8000)</span>                   <span class="blue">│</span>
+<span class="blue">│</span>  POST /generate  GET /jobs/{id}  GET /videos/*      <span class="blue">│</span>
+<span class="blue">└──────────────────────┬──────────────────────────────┘</span>
+                       │
+<span class="highlight">┌──────────────────────▼──────────────────────────────┐</span>
+<span class="highlight">│</span>         <span class="green">Job Queue (background thread)</span>               <span class="highlight">│</span>
+<span class="highlight">│</span>  QUEUED → ENHANCING → GENERATING → DONE / FAILED   <span class="highlight">│</span>
+<span class="highlight">└──────────────────────┬──────────────────────────────┘</span>
+                       │
+<span class="blue">┌──────────────────────▼──────────────────────────────┐</span>
+<span class="blue">│</span>        <span class="green">SkyReels V2 Inference Engine</span>                 <span class="blue">│</span>
+<span class="blue">│</span>  PromptEnhancer │ Text2Video │ Image2Video Pipeline  <span class="blue">│</span>
+<span class="blue">│</span>          TeaCache · GPU Offload · CUDA bfloat16     <span class="blue">│</span>
+<span class="blue">└─────────────────────────────────────────────────────┘</span>
+  </div>
+</div>
+
+<hr/>
+
+<!-- API -->
+<div class="section">
+  <h2>📡 REST <span>API</span></h2>
+  <div class="code">
+<span class="c-gray"># Submit a Text-to-Video generation job</span>
+<span class="c-green">curl</span> <span class="c-blue">-X POST</span> http://localhost:8000/generate \
+  <span class="c-blue">-F</span> <span class="c-orange">"prompt=A majestic eagle soaring over mountains at golden hour"</span> \
+  <span class="c-blue">-F</span> <span class="c-orange">"resolution=540P"</span> \
+  <span class="c-blue">-F</span> <span class="c-orange">"use_prompt_enhancer=true"</span>
+
+<span class="c-gray"># Response</span>
+{
+  <span class="c-purple">"job_id"</span>: <span class="c-orange">"abc-123"</span>,
+  <span class="c-purple">"status"</span>: <span class="c-orange">"queued"</span>,
+  <span class="c-purple">"queue_position"</span>: 1
+}
+
+<span class="c-gray"># Poll for result</span>
+<span class="c-green">curl</span> http://localhost:8000/jobs/abc-123
+
+<span class="c-gray"># Response when done</span>
+{
+  <span class="c-purple">"status"</span>: <span class="c-orange">"done"</span>,
+  <span class="c-purple">"video_url"</span>: <span class="c-orange">"/videos/abc-123.mp4"</span>,
+  <span class="c-purple">"duration_sec"</span>: 142.3,
+  <span class="c-purple">"enhanced_prompt"</span>: <span class="c-orange">"Close-up shot of a bald eagle..."</span>
+}
+  </div>
+</div>
+
+<hr/>
+
+<!-- Tech Stack -->
+<div class="section">
+  <h2>🛠️ Tech <span>Stack</span></h2>
+  <div class="tech-grid">
+    <span class="tech-pill">🔥 PyTorch</span>
+    <span class="tech-pill">🤗 Hugging Face</span>
+    <span class="tech-pill">⚡ FastAPI</span>
+    <span class="tech-pill">🎨 Gradio</span>
+    <span class="tech-pill">🦙 Qwen2.5 LLM</span>
+    <span class="tech-pill">🎬 SkyReels-V2</span>
+    <span class="tech-pill">🖥️ CUDA / bfloat16</span>
+    <span class="tech-pill">🐳 Docker-ready</span>
+    <span class="tech-pill">📊 Pandas</span>
+    <span class="tech-pill">🎞️ imageio-ffmpeg</span>
+    <span class="tech-pill">🔄 Uvicorn</span>
+    <span class="tech-pill">🧵 Threading</span>
+  </div>
+</div>
+
+<hr/>
+
+<!-- Footer -->
+<footer>
+  <p>Built by <a href="https://github.com/thaksheelm28" target="_blank">thaksheelm28</a> · 
+  <a href="https://github.com/thaksheelm28/skyreels-video-studio" target="_blank">GitHub Repo</a> · 
+  Powered by <a href="https://github.com/SkyworkAI/SkyReels-V2" target="_blank">SkyReels-V2</a></p>
+  <p style="margin-top:8px; font-size:0.8rem;">AI · Machine Learning · Generative Video · Deep Learning</p>
+</footer>
+
+</body>
+</html>
